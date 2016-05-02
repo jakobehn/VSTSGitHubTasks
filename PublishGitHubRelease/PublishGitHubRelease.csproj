@@ -24,7 +24,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\PublishGitHubReleaseTask\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -68,13 +68,13 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy $(SolutionDir)vss-extension.json $(TargetDir)\..\
-copy $(SolutionDir)icon.png $(TargetDir)\..\
-copy $(SolutionDir)screenshot1.png $(TargetDir)\..\
-copy $(SolutionDir)readme.md $(TargetDir)\..\
-copy $(SolutionDir)license.md $(TargetDir)\..\
-copy $(SolutionDir)PackageExtension.cmd $(TargetDir)\..\
-del $(TargetDir)\*.pdb</PostBuildEvent>
+    <PostBuildEvent>if $(ConfigurationName) == Release (
+  echo Cleaning package directory...
+  del "$(TargetDir)*.pdb"
+  
+  echo Packaging extension...
+  tfx extension create --root "$(SolutionDir)." --manifest-globs vss-extension.json --output-path "$(SolutionDir)."
+)</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

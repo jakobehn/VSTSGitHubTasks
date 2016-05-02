@@ -21,6 +21,8 @@ build/
 bld/
 [Bb]in/
 [Oo]bj/
+PublishGitHubReleaseTask/
+*.vsix
 
 # Visual Studio 2015 cache/options directory
 .vs/
