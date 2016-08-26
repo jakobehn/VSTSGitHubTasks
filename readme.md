@@ -17,6 +17,7 @@ You can specify the following fields in the task:
 * Draft
 * Prerelease
 * Release Assets
+* TargetCommitish
 
 
 # Documentation

@@ -4,6 +4,7 @@ Param(
 	[string]$token,
 	[string]$repo,
 	[string]$owner,
+	[string]$targetCommitish,
 	[string]$tagName,
 	[string]$releaseName,
 	[string]$releaseBody,
@@ -15,6 +16,7 @@ Write-Verbose -Verbose "Entering script PublishRelease.ps1"
 Write-Verbose -Verbose "applicationName = $applicationName"
 Write-Verbose -Verbose "token = $token"
 Write-Verbose -Verbose "repo = $repo"
+Write-Verbose -Verbose "TargetCommitish = $targetCommitish"
 Write-Verbose -Verbose "owner = $owner"
 Write-Verbose -Verbose "tagName = $tagName"
 Write-Verbose -Verbose "releaseName = $releaseName"
@@ -37,4 +39,4 @@ import-module $pathToModule
 
 $assets = Find-Files -SearchPattern $assetsPattern
 
-Publish-GitHubRelease -ApplicationName $applicationName -Token $token -Repo $repo -Owner $owner -TagName $tagName -ReleaseName $releaseName -ReleaseBody $releaseBody -Draft $draftBool -PreRelease $prereleaseBool -Assets $assets
+Publish-GitHubRelease -ApplicationName $applicationName -Token $token -Repo $repo -Owner $owner -TagName $tagName -ReleaseName $releaseName -ReleaseBody $releaseBody -Draft $draftBool -PreRelease $prereleaseBool -TargetCommitish $targetCommitish -Assets $assets

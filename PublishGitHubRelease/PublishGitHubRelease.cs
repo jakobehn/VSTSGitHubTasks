@@ -28,7 +28,10 @@ namespace PublishGitHubRelease
 		[Parameter(Mandatory = true)]
 		public string ReleaseName { get; set; }
 
-		[Parameter(Mandatory = false)]
+        [Parameter(Mandatory = false)]
+        public string TargetCommitish { get; set; }
+
+        [Parameter(Mandatory = false)]
 		public string ReleaseBody { get; set; }
 
 		[Parameter(Mandatory = true)]
@@ -51,10 +54,12 @@ namespace PublishGitHubRelease
 			    var newRelease = new NewRelease(TagName)
 			    {
 				    Name = ReleaseName,
-				    Body = ReleaseBody,					
+                    TargetCommitish = TargetCommitish,
+                    Body = ReleaseBody,					
 				    Draft = Draft,
 				    Prerelease = PreRelease,
 			    };
+
 
 			    var release = client.Repository.Release.Create(Owner, Repo, newRelease).Result;
 			    WriteVerbose("Created release with id: " + release.Id + " at " + release.Url);
