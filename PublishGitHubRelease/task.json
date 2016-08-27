@@ -13,7 +13,7 @@
   "version": {
     "Major": 0,
     "Minor": 9,
-    "Patch": 6
+    "Patch": 26
   },
   "minimumAgentVersion": "1.83.0",
   "inputs": [
@@ -52,6 +52,13 @@
       "label": "Tag Name",
       "required": true,
       "helpMarkDown": "Name of the tag to create in the repository for this release, for example v1.2.3 or v$(build.buildNumber)"
+    },
+    {
+      "name": "targetCommitish",
+      "type": "string",
+      "label": "Target Commitish",
+      "required": false,
+      "helpMarkDown": "The Commitish you wish to associated with this release (ex:sha of commit or branch name)"
     },
     {
       "name": "releaseName",
