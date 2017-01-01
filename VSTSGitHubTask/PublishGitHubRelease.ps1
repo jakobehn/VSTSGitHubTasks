@@ -1,4 +1,4 @@
-﻿[cmdletbinding()]
+[cmdletbinding()]
 Param(
 	[string]$applicationName,
 	[string]$token,
@@ -23,18 +23,21 @@ Write-Verbose -Verbose "draft = $draft"
 Write-Verbose -Verbose "prerelease = $prerelease"
 Write-Verbose -Verbose "assetsPattern = $assetsPattern"
 
-[bool]$draftBool= Convert-String $draft Boolean
-[bool]$prereleaseBool= Convert-String $prerelease Boolean
+# Convert checkbox params to booleans
+[bool]$draftBool= $draft -eq $true
+[bool]$prereleaseBool= $prerelease -eq $true
 
 # Import the Task.Common and Task.Internal dll that has all the cmdlets we need for Build
 import-module "Microsoft.TeamFoundation.DistributedTask.Task.Internal"
 import-module "Microsoft.TeamFoundation.DistributedTask.Task.Common"
 
-
+# Import PublishGitHubRelease assembly
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-$pathToModule = Join-Path $scriptDir "VSTSGitHub.dll"
+$pathToModule = Join-Path $scriptDir "PublishGitHubRelease.dll"
+$pathToOctoKit = Join-Path $scriptDir "OctoKit.dll"
+[System.Reflection.Assembly]::LoadFrom($pathToOctoKit)
 import-module $pathToModule
 
+# Travers all matching files
 $assets = Find-Files -SearchPattern $assetsPattern
-
 Publish-GitHubRelease -ApplicationName $applicationName -Token $token -Repo $repo -Owner $owner -TagName $tagName -ReleaseName $releaseName -ReleaseBody $releaseBody -Draft $draftBool -PreRelease $prereleaseBool -Assets $assets
