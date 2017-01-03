@@ -1,6 +1,8 @@
 [cmdletbinding()]
 Param(
 	[string]$applicationName,
+	[string]$gitSourceOption,
+	[string]$gitSourceUrl,
 	[string]$token,
 	[string]$repo,
 	[string]$owner,
@@ -13,6 +15,8 @@ Param(
 )
 Write-Verbose -Verbose "Entering script PublishRelease.ps1"
 Write-Verbose -Verbose "applicationName = $applicationName"
+Write-Verbose -Verbose "gitSourceOption = $gitSourceOption"
+Write-Verbose -Verbose "gitSourceUrl = $gitSourceUrl"
 Write-Verbose -Verbose "token = $token"
 Write-Verbose -Verbose "repo = $repo"
 Write-Verbose -Verbose "owner = $owner"
@@ -40,4 +44,4 @@ import-module $pathToModule
 
 # Travers all matching files
 $assets = Find-Files -SearchPattern $assetsPattern
-Publish-GitHubRelease -ApplicationName $applicationName -Token $token -Repo $repo -Owner $owner -TagName $tagName -ReleaseName $releaseName -ReleaseBody $releaseBody -Draft $draftBool -PreRelease $prereleaseBool -Assets $assets
+Publish-GitHubRelease -ApplicationName $applicationName -GitSourceOption $gitSourceOption -GitSourceUrl $gitSourceUrl -Token $token -Repo $repo -Owner $owner -TagName $tagName -ReleaseName $releaseName -ReleaseBody $releaseBody -Draft $draftBool -PreRelease $prereleaseBool -Assets $assets

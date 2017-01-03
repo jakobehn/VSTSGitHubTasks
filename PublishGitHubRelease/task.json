@@ -26,6 +26,25 @@
       "helpMarkDown": "Name of the application using the GitHub API"
     },
     {
+      "name": "gitSourceOption",
+      "type": "radio",
+      "label": "Git Source",
+      "required": true,
+      "defaultValue": "github",
+      "options": {
+        "github": "GitHub",
+        "external": "External Git"
+      }
+    },
+    {
+      "name": "gitSourceUrl",
+      "type": "string",
+      "label": "External Git URL",
+      "required": true,
+      "helpMarkDown": "The path to the git server. For example, http://localgit",
+      "visibleRule": "gitSourceOption = external"
+    },
+    {
       "name": "token",
       "type": "string",
       "label": "Token",
