@@ -2,8 +2,11 @@
   "manifestVersion": 1,
   "id": "jakobehn-vsts-github-tasks",
   "name": "VSTS Build and Release tasks for GitHub",
-  "version": "0.9.6",
+  "version": "0.10.0",
   "publisher": "jakobehn",
+  "galleryFlags": [
+    "Public"
+  ],
   "targets": [
     {
       "id": "Microsoft.VisualStudio.Services"
