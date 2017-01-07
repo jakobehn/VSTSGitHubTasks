@@ -43,7 +43,7 @@ namespace PublishGitHubRelease
         [Parameter(Mandatory = false)]
         public bool PreRelease { get; set; }
 
-        [Parameter(Mandatory = true)]
+        [Parameter(Mandatory = false)]
         public string[] Assets { get; set; }
 
         protected override void ProcessRecord()
@@ -70,23 +70,30 @@ namespace PublishGitHubRelease
 
                 var release = client.Repository.Release.Create(Owner, Repo, newRelease).Result;
                 WriteVerbose("Created release with id: " + release.Id + " at " + release.Url);
-                WriteVerbose("Uploading " + Assets.Count() + " assets");
-                foreach (var asset in Assets)
+                if (Assets != null && Assets.Any())
                 {
-                    WriteVerbose("Uploading " + asset);
-                    using (var archiveContents = File.OpenRead(asset))
+                    WriteVerbose("Uploading " + Assets.Count() + " assets");
+                    foreach (var asset in Assets)
                     {
-                        var fileName = Path.GetFileName(asset);
-                        var assetUpload = new ReleaseAssetUpload()
+                        WriteVerbose("Uploading " + asset);
+                        using (var archiveContents = File.OpenRead(asset))
                         {
-                            FileName = fileName,
-                            ContentType = "application/zip",
-                            RawData = archiveContents
-                        };
+                            var fileName = Path.GetFileName(asset);
+                            var assetUpload = new ReleaseAssetUpload()
+                            {
+                                FileName = fileName,
+                                ContentType = "application/zip",
+                                RawData = archiveContents
+                            };
 
-                        var uploadedAsset = client.Repository.Release.UploadAsset(release, assetUpload).Result;
-                        WriteVerbose("Uploaded " + uploadedAsset.Name);
+                            var uploadedAsset = client.Repository.Release.UploadAsset(release, assetUpload).Result;
+                            WriteVerbose("Uploaded " + uploadedAsset.Name);
+                        }
                     }
+                }
+                else
+                {
+                    WriteVerbose("No assets specified");
                 }
             }
             catch (Exception e)

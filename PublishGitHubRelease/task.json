@@ -13,7 +13,7 @@
   "version": {
     "Major": 0,
     "Minor": 10,
-    "Patch": 0
+    "Patch": 1
   },
   "minimumAgentVersion": "1.83.0",
   "inputs": [
@@ -108,7 +108,7 @@
       "type": "string",
       "label": "Assets To Upload",
       "defaultValue": "$(build.stagingDirectory)\\**\\*.zip",
-      "required": true,
+      "required": false,
       "helpMarkDown": "The files to upload as assets to the new release. Minimatch patterns are supported "
     }
   ],
