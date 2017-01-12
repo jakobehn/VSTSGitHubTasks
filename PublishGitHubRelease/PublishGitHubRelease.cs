@@ -16,7 +16,7 @@ namespace PublishGitHubRelease
         [Parameter(Mandatory = true)]
         public string GitSourceOption { get; set; }
 
-        [Parameter(Mandatory = true)]
+        [Parameter(Mandatory = false)]
         public string GitSourceUrl { get; set; }
 
         [Parameter(Mandatory = true)]
