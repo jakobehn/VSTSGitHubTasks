@@ -41,6 +41,7 @@
       "type": "string",
       "label": "External Git URL",
       "required": true,
+      "defaultValue": "",
       "helpMarkDown": "The path to the git server. For example, http://localgit",
       "visibleRule": "gitSourceOption = external"
     },
