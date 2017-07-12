@@ -2,7 +2,7 @@
   "manifestVersion": 1,
   "id": "jakobehn-vsts-github-tasks",
   "name": "VSTS Build and Release tasks for GitHub",
-  "version": "0.10.3",
+  "version": "0.11.0",
   "publisher": "jakobehn",
   "galleryFlags": [
     "Public"
@@ -55,7 +55,7 @@
       "path": "PublishGitHubReleaseTask"
     }
   ],
-  "contributions": [
+  "contributions": [  
     {
       "id": "publish-github-release",
       "type": "ms.vss-distributed-task.task",
