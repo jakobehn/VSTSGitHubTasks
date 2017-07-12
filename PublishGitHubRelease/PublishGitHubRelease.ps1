@@ -43,5 +43,8 @@ $pathToOctoKit = Join-Path $scriptDir "OctoKit.dll"
 import-module $pathToModule
 
 # Travers all matching files
-$assets = Find-Files -SearchPattern $assetsPattern
+if($assetsPattern) 
+{
+	$assets = Find-Files -SearchPattern $assetsPattern
+}
 Publish-GitHubRelease -ApplicationName $applicationName -GitSourceOption $gitSourceOption -GitSourceUrl $gitSourceUrl -Token $token -Repo $repo -Owner $owner -TagName $tagName -ReleaseName $releaseName -ReleaseBody $releaseBody -Draft $draftBool -PreRelease $prereleaseBool -Assets $assets
